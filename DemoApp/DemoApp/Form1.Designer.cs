@@ -29,14 +29,12 @@ namespace DemoApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.cboPort = new System.Windows.Forms.ComboBox();
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.txtReceive = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -57,7 +55,6 @@ namespace DemoApp
             this.cboPort.Name = "cboPort";
             this.cboPort.Size = new System.Drawing.Size(121, 24);
             this.cboPort.TabIndex = 1;
-            this.cboPort.SelectedIndexChanged += new System.EventHandler(this.cboPort_SelectedIndexChanged);
             // 
             // btnOpen
             // 
@@ -146,7 +143,6 @@ namespace DemoApp
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.RichTextBox txtReceive;
         private System.Windows.Forms.Label label2;
-        private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
     }

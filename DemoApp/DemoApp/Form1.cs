@@ -14,7 +14,7 @@ namespace DemoApp
     public partial class Form1 : Form
     {
         Timer t;
-        private SerialHandler _serialCommunicator;
+        SerialHandler _serialCommunicator;
 
         public Form1()
         {
@@ -22,16 +22,12 @@ namespace DemoApp
             t = new Timer();
             t.Interval = 100;
             t.Tick += t_Tick;
-            double a;
+            ///string selectedPort = cboPort.SelectedItem.ToString();
         }
 
         private void t_Tick(object sender, EventArgs e)
         {
-            if (serialPort1.IsOpen)
-            {
-                //Read text from port
-                txtReceive.Text += serialPort1.ReadExisting().Trim();
-            }
+ 
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -39,76 +35,51 @@ namespace DemoApp
             //Get all ports
             string[] ports = SerialPort.GetPortNames();
             cboPort.Items.AddRange(ports);
-            cboPort.SelectedIndex = 0;
-            btnClose.Enabled = false;
+            //cboPort.SelectedIndex = 0;
+
+            btnClose.Enabled = false; //Can't select the close button if open hasn't been clicked
+            btnStop.Enabled = false; //Can't select the sto button if the start button hasn't been clickd
         }
 
-        private void btnOpen_Click(object sender, EventArgs e)
+        private void btnOpen_Click(object sender, EventArgs e) //Opens the serial port
         {
-            if(_serialCommunicator != null)
-            {
-                _serialCommunicator.Close();
-            }
-
-            string selectedPort = cboPort.SelectedItem.ToString();
-            if (string.IsNullOrEmpty(selectedPort))
-            {
-                Console.WriteLine("Select a port first");
-                return;
-            }
-
-            _serialCommunicator = new SerialHandler(selectedPort);
-
-            _serialCommunicator.Open();
-
-            btnOpen.Enabled = false;
             btnClose.Enabled = true;
-            try
-            {
-                //Open port
-                serialPort1.PortName = cboPort.Text;
-                serialPort1.Open();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            btnOpen.Enabled = false;
+
+            //Grabbing the selected port name and initializing the serial port (kinda unsure where to place this)
+            string selectedPort = cboPort.SelectedItem.ToString(); //Grabbing the s=selected port from cbo box
+            _serialCommunicator = new SerialHandler(selectedPort);
+            _serialCommunicator.sOpen(selectedPort);
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private void btnStart_Click(object sender, EventArgs e) //Starts reading from serial port
         {
+            btnStart.Enabled = false;
+            btnStop.Enabled = true;
+            //Should poke then read from the microcontroller (maybe within the timer?)
             t.Start();
         }
 
-        private void btnStop_Click(object sender, EventArgs e)
+        private void btnStop_Click(object sender, EventArgs e) //Stops reading from the serial port
         {
             t.Stop();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e) //Closes the serial port
         {
             btnOpen.Enabled = true;
             btnClose.Enabled = false;
-            try
-            {
-                serialPort1.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            _serialCommunicator.sClose();
         }
 
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (serialPort1.IsOpen)
-                serialPort1.Close();
+            if (_serialCommunicator.isOpen())
+            {
+                _serialCommunicator.sClose();
+            }
         }
 
-        private void cboPort_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
