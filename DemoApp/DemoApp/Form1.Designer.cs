@@ -37,6 +37,8 @@ namespace DemoApp
             this.label2 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.cartesianChart1 = new LiveCharts.Wpf.CartesianChart();
             this.SuspendLayout();
             // 
             // label1
@@ -83,6 +85,7 @@ namespace DemoApp
             this.txtReceive.Size = new System.Drawing.Size(586, 105);
             this.txtReceive.TabIndex = 12;
             this.txtReceive.Text = " ";
+            this.txtReceive.TextChanged += new System.EventHandler(this.txtReceive_TextChanged);
             // 
             // label2
             // 
@@ -95,7 +98,7 @@ namespace DemoApp
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(469, 263);
+            this.btnStart.Location = new System.Drawing.Point(691, 142);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(97, 38);
             this.btnStart.TabIndex = 14;
@@ -105,7 +108,7 @@ namespace DemoApp
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(585, 263);
+            this.btnStop.Location = new System.Drawing.Point(691, 198);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(100, 38);
             this.btnStop.TabIndex = 15;
@@ -113,11 +116,21 @@ namespace DemoApp
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
+            // elementHost1
+            // 
+            this.elementHost1.Location = new System.Drawing.Point(99, 295);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(656, 262);
+            this.elementHost1.TabIndex = 16;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = this.cartesianChart1;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 712);
+            this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.txtReceive);
@@ -145,6 +158,8 @@ namespace DemoApp
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private LiveCharts.Wpf.CartesianChart cartesianChart1;
     }
 }
 
