@@ -17,8 +17,11 @@ namespace DemoApp
         System.Windows.Forms.Timer t;
         //ClassA a;
         SerialHandler _serialCommunicator;
+        string selectedPort;
 
-        public Form1()
+
+
+        public Form1() //Constructor method
         {
             InitializeComponent();
             t = new System.Windows.Forms.Timer();
@@ -39,9 +42,6 @@ namespace DemoApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Get all ports
-            string[] ports = SerialPort.GetPortNames();
-            cboPort.Items.AddRange(ports);
             //cboPort.SelectedIndex = 0; //Throws and error if there are no serial ports connect to computer
 
             btnClose.Enabled = false; //Can't select the close button if open hasn't been clicked
@@ -52,14 +52,46 @@ namespace DemoApp
 
         private void btnOpen_Click(object sender, EventArgs e) //Opens the serial port
         {
+            if(selectedPort == null)
+            {
+                Form2 popup = new Form2();
+                DialogResult dResult = popup.ShowDialog();
+                if (dResult == DialogResult.OK)
+                {
+                    Console.WriteLine("You clicked OK");
+                    popup.Dispose();
+                }
+                return;
+            }
+            /*
+            try
+            {
+                
+                _serialCommunicator = new SerialHandler(selectedPort);
+                _serialCommunicator.sOpen(selectedPort);
+                btnClose.Enabled = true;
+                btnOpen.Enabled = false;
+                btnStart.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                //Create popup window which yells at the user to select a port or connect a device
+                Console.WriteLine("Im in the catch");
+                Form2 popup = new Form2();
+                DialogResult dResult = popup.ShowDialog();
+                if(dResult == DialogResult.OK)
+                {
+                    Console.WriteLine("You clicked OK");
+                    popup.Dispose();
+                }
+            } */
+
             btnClose.Enabled = true;
             btnOpen.Enabled = false;
             btnStart.Enabled = true;
-
-            //Grabbing the selected port name and initializing the serial port (kinda unsure where to place this)
-            string selectedPort = cboPort.SelectedItem.ToString(); //Grabbing the s=selected port from cbo box
             _serialCommunicator = new SerialHandler(selectedPort);
             _serialCommunicator.sOpen(selectedPort);
+
         }
 
         private void btnStart_Click(object sender, EventArgs e) //Starts reading from serial port
@@ -105,6 +137,22 @@ namespace DemoApp
             txtReceive.ScrollToCaret(); //Scroll automatically
         }
 
+        private void cboPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedPort = cboPort.SelectedItem.ToString(); //Grabbing the selected port from cbo box if cbo box is not slected, this will be null
+        }
+
+        private void cboPort_MouseClick(object sender, MouseEventArgs e)
+        {
+            //Get all ports
+            cboPort.Items.Clear();
+            string[] ports = SerialPort.GetPortNames();
+            cboPort.Items.AddRange(ports);
+            
+
+        }
+
+
         /*
        private void button1_Click(object sender, EventArgs e)
        {
@@ -115,6 +163,6 @@ namespace DemoApp
        {
            a.Stop();
        }
-*/
+        */
     }
 }

@@ -29,6 +29,7 @@ namespace DemoApp
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.cboPort = new System.Windows.Forms.ComboBox();
             this.btnOpen = new System.Windows.Forms.Button();
@@ -57,6 +58,8 @@ namespace DemoApp
             this.cboPort.Name = "cboPort";
             this.cboPort.Size = new System.Drawing.Size(121, 24);
             this.cboPort.TabIndex = 1;
+            this.cboPort.SelectedIndexChanged += new System.EventHandler(this.cboPort_SelectedIndexChanged);
+            this.cboPort.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cboPort_MouseClick);
             // 
             // btnOpen
             // 
@@ -139,6 +142,7 @@ namespace DemoApp
             this.Controls.Add(this.cboPort);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LiveChart";

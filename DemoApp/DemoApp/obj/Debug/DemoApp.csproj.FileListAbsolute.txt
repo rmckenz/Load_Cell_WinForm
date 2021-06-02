@@ -38,3 +38,4 @@ C:\Users\Rachel\source\repos\Load_Cell_WinForm\DemoApp\DemoApp\obj\Debug\DemoApp
 C:\Users\Rachel\source\repos\Load_Cell_WinForm\DemoApp\DemoApp\obj\Debug\DemoApp.csproj.CopyComplete
 C:\Users\Rachel\source\repos\Load_Cell_WinForm\DemoApp\DemoApp\obj\Debug\DemoApp.exe
 C:\Users\Rachel\source\repos\Load_Cell_WinForm\DemoApp\DemoApp\obj\Debug\DemoApp.pdb
+C:\Users\Rachel\source\repos\Load_Cell_WinForm\DemoApp\DemoApp\obj\Debug\DemoApp.Form2.resources
