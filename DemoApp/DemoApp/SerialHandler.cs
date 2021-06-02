@@ -39,7 +39,6 @@ namespace DemoApp
                 Console.WriteLine("Select a port first");
                 return;
             }
-
             _serialPort.Open();
         }
 

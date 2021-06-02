@@ -15,7 +15,7 @@ namespace DemoApp
     public partial class Form1 : Form
     {
         System.Windows.Forms.Timer t;
-        ClassA a;
+        //ClassA a;
         SerialHandler _serialCommunicator;
 
         public Form1()
@@ -24,7 +24,7 @@ namespace DemoApp
             t = new System.Windows.Forms.Timer();
             t.Interval = 1000;  // (millis) The frequency at which the timer clicks on and off
             t.Tick += t_Tick;
-            ///string selectedPort = cboPort.SelectedItem.ToString();
+            //string selectedPort = cboPort.SelectedItem.ToString();
         }
 
         private void t_Tick(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace DemoApp
             //Get all ports
             string[] ports = SerialPort.GetPortNames();
             cboPort.Items.AddRange(ports);
-            cboPort.SelectedIndex = 0;
+            //cboPort.SelectedIndex = 0; //Throws and error if there are no serial ports connect to computer
 
             btnClose.Enabled = false; //Can't select the close button if open hasn't been clicked
             btnStop.Enabled = false; //Can't select the sto button if the start button hasn't been clickd
@@ -105,5 +105,16 @@ namespace DemoApp
             txtReceive.ScrollToCaret(); //Scroll automatically
         }
 
+        /*
+       private void button1_Click(object sender, EventArgs e)
+       {
+           a = new ClassA();
+       }
+
+       private void button2_Click(object sender, EventArgs e)
+       {
+           a.Stop();
+       }
+*/
     }
 }

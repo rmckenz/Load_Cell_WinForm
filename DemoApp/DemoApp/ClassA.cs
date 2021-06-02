@@ -12,16 +12,16 @@ namespace DemoApp
         private ClassB secondaryClass; //represents serial handler
         public List<int> Values;
         public bool flag;
-        private Thread readThread;
+        private Thread readThread; //defining a thread called readThread
         public ClassA()
         {
             secondaryClass = new ClassB();
             flag = true;
 
-            readThread = new Thread(new ThreadStart(Read));
+            readThread = new Thread(new ThreadStart(Read)); //instantiating readThread
             readThread.Name = "Read Thread";
-            readThread.IsBackground = true;
-            readThread.Start();
+            readThread.IsBackground = true; //this runs in the background (form interaction in the foreground)
+            readThread.Start(); //Starts the new thread when and object of class a is constructed
             
         }
 
