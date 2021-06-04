@@ -18,27 +18,17 @@ namespace DemoApp
         public SerialHandler(string portName) //Constructor Class
         {
             _serialPort = new SerialPort(portName); //constructing the new serial port will take the string from the cbo box in application
-            _serialPort.DataReceived += _serialPort_DataReceived;
-            readReady = false;
+            _serialPort.DataReceived += _serialPort_DataReceived; //Creating an event handler for when data is recieved through the selected serial port
+            readReady = false; //Initializes it so that is is not ready to read - make sense we haven't poked
         }
 
         private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            readReady = true;
+            readReady = true; //If data is in the buffer on the serial port, the device is now ready to read the info
         }
 
-        public void sOpen(string selectedPort)
+        public void sOpen()
         {
-            if (_serialPort.IsOpen)  //If the serial port is already open close it
-            {
-                _serialPort.Close();
-            }
-
-            if (string.IsNullOrEmpty(selectedPort))
-            {
-                Console.WriteLine("Select a port first");
-                return;
-            }
             _serialPort.Open();
         }
 
@@ -49,14 +39,7 @@ namespace DemoApp
 
         public void sClose()
         {
-            /*
-            if (!(_serialPort.IsOpen))
-            {
-                return;
-            } */
-
             _serialPort.Close();
-
         }
 
 
@@ -66,13 +49,7 @@ namespace DemoApp
             {
                 _serialPort.Open();
             }
-            _serialPort.WriteLine(this.poke);
-
-            /*
-            int sendSignal = 1;
-            byte[] b = BitConverter.GetBytes(sendSignal);
-            _serialPort.Write(b, 0, 4);
-            */
+            _serialPort.WriteLine(this.poke); //Sends "0" over the serial port
 
         }
 
@@ -80,7 +57,6 @@ namespace DemoApp
         {
             string recieveData;
             recieveData = _serialPort.ReadLine();
-          //  Console.WriteLine(recieveData);
             readReady = false;
             return recieveData;
         }

@@ -15,7 +15,6 @@ namespace DemoApp
     public partial class Form1 : Form
     {
         System.Windows.Forms.Timer t;
-        //ClassA a;
         SerialHandler _serialCommunicator;
         string selectedPort;
 
@@ -27,7 +26,6 @@ namespace DemoApp
             t = new System.Windows.Forms.Timer();
             t.Interval = 1000;  // (millis) The frequency at which the timer clicks on and off
             t.Tick += t_Tick;
-            //string selectedPort = cboPort.SelectedItem.ToString();
         }
 
         private void t_Tick(object sender, EventArgs e)
@@ -52,7 +50,7 @@ namespace DemoApp
 
         private void btnOpen_Click(object sender, EventArgs e) //Opens the serial port
         {
-            if(selectedPort == null)
+            if(selectedPort == null) //Pops up a window to yell at user if no port was selected
             {
                 Form2 popup = new Form2();
                 DialogResult dResult = popup.ShowDialog();
@@ -63,34 +61,13 @@ namespace DemoApp
                 }
                 return;
             }
-            /*
-            try
-            {
-                
-                _serialCommunicator = new SerialHandler(selectedPort);
-                _serialCommunicator.sOpen(selectedPort);
-                btnClose.Enabled = true;
-                btnOpen.Enabled = false;
-                btnStart.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                //Create popup window which yells at the user to select a port or connect a device
-                Console.WriteLine("Im in the catch");
-                Form2 popup = new Form2();
-                DialogResult dResult = popup.ShowDialog();
-                if(dResult == DialogResult.OK)
-                {
-                    Console.WriteLine("You clicked OK");
-                    popup.Dispose();
-                }
-            } */
 
+            //If port is selected
             btnClose.Enabled = true;
             btnOpen.Enabled = false;
             btnStart.Enabled = true;
             _serialCommunicator = new SerialHandler(selectedPort);
-            _serialCommunicator.sOpen(selectedPort);
+            _serialCommunicator.sOpen();
 
         }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DemoApp
 {
-    class ClassA
+    /*Class ClassA
     {
         private ClassB secondaryClass; //represents serial handler
         public List<int> Values;
@@ -33,7 +35,7 @@ namespace DemoApp
             {
                 secondaryClass.print();
                 Console.WriteLine("Reading from secondary thread");
-                Thread.Sleep(1000);
+                Thread.Sleep(1000); //This sleep functions as the timer and is what grabs a data point ever 1000millis/1s
             }
             //serial port close
             Console.WriteLine("Close serial port");
@@ -49,5 +51,5 @@ namespace DemoApp
         {
             //_serialPort.Close();
         }
-    }
+    } */
 }

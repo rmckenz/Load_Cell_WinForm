@@ -64,6 +64,7 @@
     <Compile Include="DataHandler.cs" />
     <Compile Include="ClassA.cs" />
     <Compile Include="ClassB.cs" />
+    <Compile Include="DataTester.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
