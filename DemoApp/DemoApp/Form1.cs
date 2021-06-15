@@ -19,7 +19,6 @@ namespace DemoApp
         string selectedPort;
 
 
-
         public Form1() //Constructor method
         {
             InitializeComponent();
@@ -27,6 +26,7 @@ namespace DemoApp
             t.Interval = 1000;  // (millis) The frequency at which the timer clicks on and off
             t.Tick += t_Tick;
         }
+
 
         private void t_Tick(object sender, EventArgs e)
         {
@@ -128,18 +128,5 @@ namespace DemoApp
             
 
         }
-
-
-        /*
-       private void button1_Click(object sender, EventArgs e)
-       {
-           a = new ClassA();
-       }
-
-       private void button2_Click(object sender, EventArgs e)
-       {
-           a.Stop();
-       }
-        */
     }
 }
